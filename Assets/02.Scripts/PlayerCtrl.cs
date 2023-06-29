@@ -44,7 +44,9 @@ public class PlayerCtrl : MonoBehaviour
         //HP 초기화
         currHp = initHp;
 
-       
+        // Hpbar 연결
+        hpBar = GameObject.FindGameObjectWithTag("HP_BAR")?.GetComponent<Image>();
+        DisplayHealth();
     }
 
     // Update is called once per frame
@@ -112,10 +114,9 @@ public class PlayerCtrl : MonoBehaviour
     }
 
     // Player의 사망 처리
-    // Player의 사망 처리
     void PlayerDie()
     {
-        Debug.Log("Player Die !");
+        //Debug.Log("Player Die !");
         // // MONSTER 태그를 가진 모든 게임오브젝트를 찾아옴
         // GameObject[] monsters = GameObject.FindGameObjectsWithTag("MONSTER");
         // // 모든 몬스터의 OnPlayerDie 함수를 순차적으로 호출
@@ -125,6 +126,9 @@ public class PlayerCtrl : MonoBehaviour
         // }
         // 주인공 사망 이벤트 호출(발생)
         OnPlayerDie();
+
+        //GameObject.Find("GameMgr").GetComponent<GameManager>().IsGameOver = true;
+        GameManager.instance.IsGameOver = true;
     }
 
     void DisplayHealth()
